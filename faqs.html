@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Charter House Cars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1f36;
+            --accent: #ff6b35;
+            --accent-light: #ff8c5a;
+            --text: #2d3748;
+            --light: #f8f9fa;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        /* Header Styles */
+        .hero-header {
+            background-color: white;
+            color: black;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .hero-header.scrolled {
+            padding: 1rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        #logo-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b35 25%, #1a1f36 75%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(26, 31, 54, 0.1);
+            position: relative;
+            top: 6px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            text-stroke: 1px rgba(26, 31, 54, 0.2);
+            -webkit-text-stroke: 1px rgba(26, 31, 54, 0.2);
+        }
+
+        #logo-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, #1a1f36 15%, #ff6b35 85%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: blur(2px);
+            opacity: 0.7;
+        }
+
+        #logo-text:hover {
+            transform: translateY(-2px) scale(1.02);
+            text-shadow: 3px 3px 6px rgba(26, 31, 54, 0.15);
+        }
+
+        @keyframes logo-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        #logo-text {
+            animation: logo-float 4s ease-in-out infinite;
+        }
+
+        /* Hero Section */
+        .faq-hero {
+            background-color: var(--primary);
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .faq-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+        }
+
+        .faq-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 25px 25px;
+            max-height: 500px;
+            border-top: 1px solid #eee;
+        }
+
+        .faq-toggle {
+            width: 25px;
+            height: 25px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-left: 15px;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-toggle {
+            background-color: var(--accent);
+            transform: rotate(180deg);
+        }
+
+        .contact-prompt {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-prompt h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .contact-prompt p {
+            margin-bottom: 20px;
+            color: #64748b;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-btn:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+ 
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        .footer-bottom {
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: white;
+    font-size: 0.9rem;
+}
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .faq-title h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="hero-header" id="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="logo-image.png" alt="Charter House Cars Logo" class="logo-img">
+                <div id="logo-text">CHARTERHOUSECARS</div>
+            </div>
+            <!-- Navigation would go here -->
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="faq-hero">
+        <div class="hero-content">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our services</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <div class="faq-container">
+        <div class="faq-title">
+            <h2>Your Questions Answered</h2>
+            <p>Can't find what you're looking for? Contact us directly for more information.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How much does your airport taxi service cost?</span>
+                <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+                <p>Please see our prices or contact us via phone or WhatsApp.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you offer a meet and greet at the airport?</span>
+                <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, we offer a professional Meet & Greet service at the airport. Our driver will monitor your flight, meet you at the arrivals hall with a name board, and assist you with your luggage.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you offer group transfers to and from the airport?</span>
+                <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, we offer group transfers to and from the airport. Our spacious vehicles can accommodate groups of various sizes, ensuring a comfortable and hassle-free journey. Whether you're traveling for business, a family trip, or a special event, we provide reliable and punctual service.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you charge for airport parking?</span>
+                <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+                <p>Additional charges may apply for waiting time, extra stops, or late-night bookings. Please check our pricing details.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you offer airport transfers to other areas besides Godalming?</span>
+                <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, we offer airport transfers to and from a wide range of areas beyond Godalming. Whether you need a transfer to a nearby town, city, or a specific destination, our reliable service ensures a comfortable and timely journey. Contact us to check availability and get a quote for your preferred location across London and surrounding areas, including major airports and railway stations.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Do you track flights?</span>
+                <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, we track flights in real time. Our system monitors your flight status for delays, cancellations, and early arrivals, ensuring your taxi is ready when you need it. Just provide your flight number when booking, and we'll adjust pickup times accordingly.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How can I book a taxi to Godalming airport?</span>
+                <div class="faq-toggle">+</div>
+            </div>
+            <div class="faq-answer">
+                <p>To book a taxi from Godalming to an airport, please call us on 01483 962169.</p>
+            </div>
+        </div>
+
+        <div class="contact-prompt">
+            <h3>Still have questions?</h3>
+            <p>We're here to help! Contact us directly for more information about our services.</p>
+            <a href="https://wa.me/message/6GOCSDYA2UXDL1" target="_parent" class="contact-btn">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    
+    <footer class="footer" data-aos="fade-up" data-aos-delay="500">
+        <div class="footer-content">
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Charter House Cars</h3>
+                <div class="footer-links">
+                    <a href="index.html" target="_parent">Home</a>
+                    <a href="about-us.html" target="_parent">About Us</a>
+                    <a href="services.html" target="_parent">Services</a>
+                    <a href="faqs.html" target="_parent">FAQs</a>
+                </div>
+            </div>
+    
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Services</h3>
+                <div class="footer-links">
+                    <a href="airport-transfer.html" target="_parent">Airport Transfers</a>
+                    <a href="corporate.html" target="_parent">Corporate Travel</a>
+                    <a href="special-events.html" target="_parent">Special Events</a>
+                </div>
+            </div>
+    
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Contact</h3>
+                <div class="footer-links">
+                   <p><i class="fas fa-phone"></i> &nbsp;01483962169</p>
+                    <p><i class="fas fa-envelope"></i> info@charterhousecars.co.uk</p>
+                    <!-- <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Charter House Cars. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+         <!-- JavaScript for Call Button -->
+        
+                document.getElementById("callButton").addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevents default anchor behavior
+                    window.location.href = "tel:01483962169"; // Opens the dial pad directly
+                });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // FAQ toggle functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentNode;
+                    item.classList.toggle('active');
+                    
+                    // Close other open items
+                    faqQuestions.forEach(q => {
+                        if (q !== question) {
+                            q.parentNode.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

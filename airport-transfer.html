@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport Transfers | Charter House Cars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1f36;
+            --accent: #ff6b35;
+            --accent-light: #ff8c5a;
+            --text: #2d3748;
+            --light: #f8f9fa;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        /* Header Styles */
+        .hero-header {
+            background-color: white;
+            color: black;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .hero-header.scrolled {
+            padding: 1rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        #logo-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem; /* Increased size */
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b35 25%, #1a1f36 75%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 4px rgba(26, 31, 54, 0.1);
+    position: relative;
+    top: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    text-stroke: 1px rgba(26, 31, 54, 0.2);
+    -webkit-text-stroke: 1px rgba(26, 31, 54, 0.2);
+}
+
+#logo-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: linear-gradient(45deg, #1a1f36 15%, #ff6b35 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: blur(2px);
+    opacity: 0.7;
+}
+
+#logo-text:hover {
+    transform: translateY(-2px) scale(1.02);
+    text-shadow: 3px 3px 6px rgba(26, 31, 54, 0.15);
+}
+
+@keyframes logo-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+#logo-text {
+    animation: logo-float 4s ease-in-out infinite;
+}
+
+        /* Hero Section */
+        .airport-hero {
+            background-image: linear-gradient(rgba(26, 31, 54, 0.8), rgba(26, 31, 54, 0.7)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Airport Transfer Content */
+        .airport-content {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image img {
+            transform: scale(1.05);
+        }
+
+        .service-details {
+            padding: 25px;
+        }
+
+        .service-details h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .service-details p {
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            margin-top: 20px;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .service-features i {
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        /* Airport List Section */
+        .airport-list {
+            background: #f8fafc;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .airport-list-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .airport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .airport-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .airport-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .airport-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .airport-info h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .airport-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .booking-section h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .booking-section p {
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+       
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        .footer-bottom {
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: white;
+    font-size: 0.9rem;
+}
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="hero-header" id="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="logo-image.png" alt="Charter House Cars Logo" class="logo-img">
+                <div id="logo-text">CHARTERHOUSECARS</div>
+            </div>
+            <!-- Navigation would go here -->
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="airport-hero">
+        <div class="hero-content">
+            <h1>Premium Airport Transfers</h1>
+            <p>Experience seamless travel with our professional airport transfer services across London and surrounding areas</p>
+            <a href="book.html" class="cta-button" target="_parent">Book Now</a>
+        </div>
+    </section>
+
+    <!-- Airport Transfer Content -->
+    <div class="airport-content">
+        <div class="section-title">
+            <h2>Our Airport Transfer Services</h2>
+            <p>Reliable, comfortable, and punctual airport transfers tailored to your schedule and needs</p>
+        </div>
+
+        <!-- <div class="service-grid">
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Meet and Greet Service">
+                </div>
+                <div class="service-details">
+                    <h3>Meet & Greet Service</h3>
+                    <p>Our professional driver will meet you at arrivals with a name board, assist with luggage, and ensure a smooth transition to your vehicle.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Flight tracking included</li>
+                        <li><i class="fas fa-check"></i> 60 minutes free waiting time</li>
+                        <li><i class="fas fa-check"></i> Luggage assistance</li>
+                    </ul>
+                </div>
+            </div> -->
+
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Executive Transfers">
+                </div>
+                <div class="service-details">
+                    <h3>Executive Transfers</h3>
+                    <p>Travel in style with our premium fleet of luxury vehicles, perfect for business travelers or special occasions.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Luxury vehicles</li>
+                        <li><i class="fas fa-check"></i> Complimentary water</li>
+                        <li><i class="fas fa-check"></i> Professional chauffeurs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Group Transfers">
+                </div>
+                <div class="service-details">
+                    <h3>Group Transfers</h3>
+                    <p>Ideal for families or corporate groups, our spacious vehicles can accommodate up to 8 passengers with luggage.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Minivans and people carriers</li>
+                        <li><i class="fas fa-check"></i> Cost-effective for groups</li>
+                        <li><i class="fas fa-check"></i> One flat rate</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Airport List Section -->
+    <div class="airport-list">
+        <div class="airport-list-container">
+            <div class="section-title">
+                <h2>Airports We Serve</h2>
+                <p>We provide reliable transfers to all major London airports and beyond</p>
+            </div>
+
+            <div class="airport-grid">
+                <div class="airport-item">
+                    <div class="airport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="airport-info">
+                        <h4>Heathrow (LHR)</h4>
+                        <p>Price (depending on location)</p>
+                    </div>
+                </div>
+
+                <div class="airport-item">
+                    <div class="airport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="airport-info">
+                        <h4>Gatwick (LGW)</h4>
+                        <p>Price(depending on location)</p>
+                    </div>
+                </div>
+
+                <div class="airport-item">
+                    <div class="airport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="airport-info">
+                        <h4>Stansted (STN)</h4>
+                        <p>Price (depending on location)</p>
+                    </div>
+                </div>
+
+                <div class="airport-item">
+                    <div class="airport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="airport-info">
+                        <h4>Luton (LTN)</h4>
+                        <p>Price (depending on location)</p>
+                    </div>
+                </div>
+
+                <div class="airport-item">
+                    <div class="airport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="airport-info">
+                        <h4>London City (LCY)</h4>
+                        <p>Price (depending on location)</p>
+                    </div>
+                </div>
+
+                <div class="airport-item">
+                    <div class="airport-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="airport-info">
+                        <h4>Southend (SEN)</h4>
+                        <p>Price (depending on location)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Section -->
+    <div class="booking-section" id="booking">
+        <h2>Ready to Book Your Airport Transfer?</h2>
+        <p>Experience the convenience and comfort of our premium airport transfer service. Book online or call us directly to arrange your journey.</p>
+        <a href="book.html" class="cta-button" target="_parent">Book Now</a>
+    </div>
+
+
+    <footer class="footer" data-aos="fade-up" data-aos-delay="500">
+        <div class="footer-content">
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Charter House Cars</h3>
+                <div class="footer-links">
+                    <a href="index.html" target="_parent">Home</a>
+                    <a href="about-us.html" target="_parent">About Us</a>
+                    <a href="services.html" target="_parent">Services</a>
+                    <a href="faqs.html" target="_parent">FAQs</a>
+                </div>
+            </div>
+    
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Services</h3>
+                <div class="footer-links">
+                    <a href="airport-transfer.html" target="_parent">Airport Transfers</a>
+                    <a href="corporate.html" target="_parent">Corporate Travel</a>
+                    <a href="special-events.html" target="_parent">Special Events</a>
+                </div>
+            </div>
+    
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Contact</h3>
+                <div class="footer-links">
+                    <p><i class="fas fa-phone"></i> &nbsp;01483962169</p>
+                    <p><i class="fas fa-envelope"></i> info@charterhousecars.co.uk</p>
+                    <!-- <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Charter House Cars. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+
+    
+    <footer>
+        <p>&copy; 2025 CHARTERHOUSECARS. All rights reserved.</p>
+    </footer>
+</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

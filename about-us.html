@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Charter House Cars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1f36;
+            --accent: #ff6b35;
+            --text: #2d3748;
+            --light: #f8f9fa;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        .hero-header {
+            background-color: rgb(248, 245, 245);
+            color: black;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            letter-spacing: 0.05em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        #logo-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b35 25%, #1a1f36 75%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(26, 31, 54, 0.1);
+            position: relative;
+            top: 6px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            text-stroke: 1px rgba(26, 31, 54, 0.2);
+            -webkit-text-stroke: 1px rgba(26, 31, 54, 0.2);
+        }
+
+        #logo-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, #1a1f36 15%, #ff6b35 85%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: blur(2px);
+            opacity: 0.7;
+        }
+
+        #logo-text:hover {
+            transform: translateY(-2px) scale(1.02);
+            text-shadow: 3px 3px 6px rgba(26, 31, 54, 0.15);
+        }
+
+        @keyframes logo-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        #logo-text {
+            animation: logo-float 4s ease-in-out infinite;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-icon {
+            font-size: 1.75rem;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 100px auto 0;
+            padding: 2rem;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: slideUp 1s 0.2s forwards;
+        }
+
+        .about-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.05em;
+        }
+
+        .about-subtitle {
+            color: #64748b;
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 6rem;
+            gap: 3rem;
+        }
+
+        .about-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .about-image:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-text {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardEntry 0.6s forwards;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .team-section {
+            margin: 6rem 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardEntry 0.6s forwards;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-card:hover .team-image img {
+            transform: scale(1.05);
+        }
+
+        .team-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-position {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-bio {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), #0f1322);
+            border-radius: 1.5rem;
+            padding: 4rem 2rem;
+            margin: 6rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        .footer-bottom {
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: white;
+    font-size: 0.9rem;
+}
+        
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cardEntry {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .about-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-section {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                height: 400px;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="hero-header">
+        <div class="logo">
+            <img src="logo-image.png" alt="" width="100px">
+            <span id="logo-text">CHARTERHOUSECARS</span>
+        </div>
+    </header>
+
+    <main class="about-container">
+        <section class="about-header">
+            <h1 class="about-title">Our Journey of Excellence</h1>
+            <p class="about-subtitle">Redefining luxury transportation since 2005 with unmatched service and sophistication</p>
+        </section>
+
+        <section class="about-section">
+            <div class="about-content">
+                <h2 class="section-title">Our Heritage</h2>
+                <p class="section-text">Founded in the heart of London, Charter House Cars began with a simple vision: to create the most refined chauffeur experience in the industry. What started as a modest fleet of three luxury vehicles has grown into a premier transportation service spanning major cities across Europe.</p>
+                <p class="section-text">Our founder, James Charter, established the company on principles of discretion, reliability, and impeccable service - values that continue to guide every journey we undertake today.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Vintage luxury car">
+            </div>
+        </section>
+
+        <section class="about-section reverse">
+            <div class="about-content">
+                <h2 class="section-title">The Charter Standard</h2>
+                <p class="section-text">We don't just transport passengers - we curate experiences. Every Charter House journey is built on three pillars:</p>
+                <ul style="color: #64748b; margin-bottom: 2rem; padding-left: 1.5rem;">
+                    <li style="margin-bottom: 0.5rem;"><strong>Uncompromising Safety:</strong> Rigorous vehicle maintenance and chauffeur training</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>Discreet Professionalism:</strong> White-glove service with absolute confidentiality</li>
+                    <li><strong>Tailored Comfort:</strong> Bespoke amenities for each client's preferences</li>
+                </ul>
+                <p class="section-text">This commitment has made us the preferred choice for diplomats, executives, and discerning travelers who expect nothing less than perfection.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Professional chauffeur">
+            </div>
+        </section>
+
+        <div class="stats-container">
+            <div class="stat-card" style="animation-delay: 0.2s">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card" style="animation-delay: 0.4s">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Luxury Vehicles</div>
+            </div>
+            <div class="stat-card" style="animation-delay: 0.6s">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Satisfied Clients</div>
+            </div>
+            <div class="stat-card" style="animation-delay: 0.8s">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Global Service</div>
+            </div>
+        </div>
+
+        <section class="team-section">
+            <h2 class="section-title" style="text-align: center;">Meet Our Leadership</h2>
+            <p class="about-subtitle" style="text-align: center; margin-bottom: 3rem;">The dedicated professionals who steer our vision</p>
+            
+            <div class="team-grid">
+                <div class="team-card" style="animation-delay: 0.2s">
+                    <!-- <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="James Charter">
+                    </div> -->
+                    <div class="team-info">
+                        <h3 class="team-name">Junaid Munir  </h3>
+                        <p class="team-position">Founder & CEO</p>
+                        <p class="team-bio">With 25 years in luxury transportation, James established the gold standard for chauffeur services.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" style="animation-delay: 0.4s">
+                    <!-- <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sarah Wellington">
+                    </div> -->
+                    <div class="team-info">
+                        <h3 class="team-name">Munir Akhtar</h3>
+                        <p class="team-position">Operations Director</p>
+                        <p class="team-bio">Ensures flawless execution of every journey with military precision.</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" style="animation-delay: 0.6s">
+                    <i class="fa-fa-person"></i>
+                    <!-- <div class="team-image">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Michael Rodriguez">
+                    </div> -->
+                    <div class="team-info">
+                        <h3 class="team-name">Sohail Munir</h3>
+                        <p class="team-position">Fleet Manager</p>
+                        <p class="team-bio">Maintains our vehicles in showroom condition with exacting standards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div style="position: relative; z-index: 1">
+                <h2 class="cta-title">Experience the Charter Difference</h2>
+                <p class="about-subtitle" style="color: rgba(255,255,255,0.9); margin-bottom: 2rem">
+                    Where every journey is an occasion
+                </p>
+                <a href="book.html" class="cta-button">
+                    Book Your Ride <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+   
+    <footer class="footer" data-aos="fade-up" data-aos-delay="500">
+        <div class="footer-content">
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Charter House Cars</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about-us.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="faqs.html">FAQs</a>
+                </div>
+            </div>
+    
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Services</h3>
+                <div class="footer-links">
+                    <a href="airport-transfer.html">Airport Transfers</a>
+                    <a href="corporate.html">Corporate Travel</a>
+                    <a href="special-events.html">Special Events</a>
+                </div>
+            </div>
+    
+            <div class="footer-section" data-aos="fade-up" data-aos-delay="500">
+                <h3>Contact</h3>
+                <div class="footer-links">
+                    <p><i class="fas fa-phone"></i> &nbsp;01483962169</p>
+                    <p><i class="fas fa-envelope"></i> info@charterhousecars.co.uk</p>
+                    <!-- <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Charter House Cars. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

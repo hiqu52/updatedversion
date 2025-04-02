@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Travel | Charter House Cars</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1f36;
+            --accent: #ff6b35;
+            --accent-light: #ff8c5a;
+            --text: #2d3748;
+            --light: #f8f9fa;
+            --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        /* Header Styles */
+        .hero-header {
+            background-color: white;
+            color: black;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .hero-header.scrolled {
+            padding: 1rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+
+        #logo-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem; /* Increased size */
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b35 25%, #1a1f36 75%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 4px rgba(26, 31, 54, 0.1);
+    position: relative;
+    top: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    text-stroke: 1px rgba(26, 31, 54, 0.2);
+    -webkit-text-stroke: 1px rgba(26, 31, 54, 0.2);
+}
+
+#logo-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: linear-gradient(45deg, #1a1f36 15%, #ff6b35 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: blur(2px);
+    opacity: 0.7;
+}
+
+#logo-text:hover {
+    transform: translateY(-2px) scale(1.02);
+    text-shadow: 3px 3px 6px rgba(26, 31, 54, 0.15);
+}
+
+@keyframes logo-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+#logo-text {
+    animation: logo-float 4s ease-in-out infinite;
+}
+        /* Hero Section */
+        .corporate-hero {
+            background-image: linear-gradient(rgba(26, 31, 54, 0.8), rgba(26, 31, 54, 0.7)), url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Corporate Content */
+        .corporate-content {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .benefit-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 1.8rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .benefit-card p {
+            color: #64748b;
+        }
+
+        /* Fleet Section */
+        .fleet-section {
+            background: #f8fafc;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .fleet-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .fleet-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .fleet-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .fleet-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .fleet-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .fleet-card:hover .fleet-image img {
+            transform: scale(1.05);
+        }
+
+        .fleet-details {
+            padding: 25px;
+        }
+
+        .fleet-details h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .fleet-details p {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .fleet-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .spec-item i {
+            color: var(--accent);
+            margin-right: 8px;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .booking-section h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .booking-section p {
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+        .footer-bottom {
+    margin-top: 60px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: white;
+    font-size: 0.9rem;
+}
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid, .fleet-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="hero-header" id="header">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="logo-image.png" alt="Charter House Cars Logo" class="logo-img">
+                <div id="logo-text">CHARTERHOUSECARS</div>
+            </div>
+            <!-- Navigation would go here -->
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="corporate-hero">
+        <div class="hero-content">
+            <h1>Corporate Travel Solutions</h1>
+            <p>Premium chauffeur services designed for business professionals and corporate clients</p>
+            <a href="book.html" target="_parent" class="cta-button">Request Corporate Account</a>
+        </div>
+    </section>
+
+    <!-- Corporate Content -->
+    <div class="corporate-content">
+        <div class="section-title">
+            <h2>Why Choose Our Corporate Services</h2>
+            <p>Reliable, efficient, and professional transportation tailored to your business needs</p>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Punctuality Guaranteed</h3>
+                <p>We understand the importance of time in business. Our drivers are trained to ensure you arrive at every meeting on schedule.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Productive Travel</h3>
+                <p>Work comfortably in our executive vehicles with complimentary WiFi, charging ports, and ample workspace.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Cost Efficiency</h3>
+                <p>Our corporate accounts provide detailed reporting and competitive rates to help manage your travel budget.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Dedicated Support</h3>
+                <p>24/7 account management and priority booking for your corporate travel needs.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>Professional Chauffeurs</h3>
+                <p>Our drivers are trained in corporate etiquette and discretion for sensitive business matters.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Global Coverage</h3>
+                <p>Seamless transfers between airports, hotels, offices and event venues across London and beyond.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fleet Section -->
+    <div class="fleet-section">
+        <div class="fleet-container">
+            <div class="section-title">
+                <h2>Our Corporate Fleet</h2>
+                <p>Premium vehicles designed for business travel comfort and professionalism</p>
+            </div>
+
+            <div class="fleet-grid">
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Executive Sedan">
+                    </div>
+                    <div class="fleet-details">
+                        <h3>Executive Sedan</h3>
+                        <p>Ideal for individual executives or small groups needing discreet, comfortable transportation.</p>
+                        <div class="fleet-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>3 passengers</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-suitcase"></i>
+                                <span>2 large bags</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-wifi"></i>
+                                <span>WiFi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Luxury SUV">
+                    </div>
+                    <div class="fleet-details">
+                        <h3>Luxury SUV</h3>
+                        <p>Spacious and commanding presence for executives who require extra room and comfort.</p>
+                        <div class="fleet-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>4 passengers</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-suitcase"></i>
+                                <span>4 large bags</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-wifi"></i>
+                                <span>WiFi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fleet-card">
+                    <div class="fleet-image">
+                        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Executive Van">
+                    </div>
+                    <div class="fleet-details">
+                        <h3>Executive Van</h3>
+                        <p>Perfect for corporate groups or teams traveling together to meetings and events.</p>
+                        <div class="fleet-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>6 passengers</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-suitcase"></i>
+                                <span>8 large bags</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-wifi"></i>
+                                <span>WiFi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Section -->
+    <div class="booking-section" id="booking">
+        <h2>Ready to Elevate Your Corporate Travel?</h2>
+        <p>Contact us today to discuss your business transportation needs and set up a corporate account.</p>
+        <a href="https://wa.me/message/6GOCSDYA2UXDL1" class="cta-button">Contact Our Corporate Team</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Charter House Cars</h3>
+                <div class="footer-links">
+                    <a href="index.html" target="_parent">Home</a>
+                    <a href="about-us.html" target="_parent">About Us</a>
+                    <a href="services.html" target="_parent">Services</a>
+                    <a href="faqs.html" target="_parent">FAQs</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Services</h3>
+                <div class="footer-links">
+                    <a href="airport-transfers.html" target="_parent">Airport Transfers</a>
+                    <a href="corporate-travel.html" target="_parent">Corporate Travel</a>
+                    <a href="special-events.html" target="_parent">Special Events</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <div class="footer-links">
+                    <p><i class="fas fa-phone"></i> +44 20 7123 4567</p>
+                    <p><i class="fas fa-envelope"></i> corporate@charterhousecars.co.uk</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Charter House Cars. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
